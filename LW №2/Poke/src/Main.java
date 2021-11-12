@@ -1,6 +1,6 @@
 import ru.ifmo.se.pokemon.*;
 
-public class Battlegroung {
+public class Main {
     public static void main(String[] args){
         Battle field = new Battle();
         field.addAlly(new Phione("Baileys", 1));
