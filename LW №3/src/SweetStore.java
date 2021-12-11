@@ -2,7 +2,7 @@ import java.util.Objects;
 
 public class SweetStore implements StatusActions {
     private static double toffeePrice;
-    protected ChildBalance storage;
+    protected ActualBalance storage;
 
     protected static void setPrice(double _toffeePrice){
         toffeePrice = _toffeePrice;
@@ -13,14 +13,19 @@ public class SweetStore implements StatusActions {
         return toffeePrice;
     }
 
-    SweetStore(ChildBalance storage){
+    SweetStore(ActualBalance storage){
         this.storage = storage;
         System.out.println("Sweet store is open");
     }
 
     @Override
     public String toString() {
-        return "SweetStore storage = " + storage.getBalance() + " Ores and " + storage.getToffees() + " Toffees";
+        return "SweetStore storage: " + storage;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(storage);
     }
 
     @Override
@@ -31,13 +36,8 @@ public class SweetStore implements StatusActions {
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(storage);
-    }
-
-    @Override
     public void throwError(){
-        System.out.println("> In the sweet store you can buy toffees");
+        System.out.println("In the sweet store you can buy toffees");
     }
 
     @Override

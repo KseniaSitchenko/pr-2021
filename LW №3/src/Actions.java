@@ -1,8 +1,8 @@
 interface ChildrenActions {
-    void giveToffeesToAnother(Child child);
-    void buyToffees(SweetStore store);
     void makeAnnouncement();
     void changeLocation(Locations place);
+    void buyToffees(SweetStore store);
+    void giveToffeesToAnother(Child child);
 }
 
 interface StatusActions {
