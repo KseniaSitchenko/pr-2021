@@ -12,8 +12,17 @@ public class Main {
         Child betan = new Child(street, new ActualBalance(Math.round(Math.random() * 100), 0), "Betan");
         System.out.println(gunilla.changeLocation(street));
         System.out.println(krister.changeLocation(street));
-        System.out.println(gunilla.makeAnnouncement());
-        System.out.println(krister.makeAnnouncement());
+
+        //анонимный класс для объявления о шоу
+        Announcement showAnnouncement = new Announcement() {
+            @Override
+            public void makeAnnouncement(Child child) {
+                System.out.printf("%s says: There will be a Great Show \"Evening of Miracles\" in Lillebrors's room\n", child.name);
+            }
+        };
+        showAnnouncement.makeAnnouncement(gunilla);
+        showAnnouncement.makeAnnouncement(krister);
+
         System.out.println(gunilla.changeLocation(room));
         System.out.println(krister.changeLocation(room));
         System.out.println(kirre.changeLocation(store));
@@ -24,7 +33,6 @@ public class Main {
             System.out.println(City.SweetStore.setToffees(600));
         }
         catch (SetToffeesException e){
-            e.printStackTrace();
             System.out.println(City.SweetStore.setToffees(e.getAbsQuantity()));
         }
         System.out.println(kirre.buyToffees());
@@ -37,7 +45,7 @@ public class Main {
         System.out.println(gunilla.takeToffeesFromAnother(bosse));
         System.out.println(gunilla.takeToffeesFromAnother(betan));
         System.out.println(gunilla.giveBoxToAnother(karlsson));
-        System.out.println(krister.setUpChairs());
+        System.out.println(krister.setUpChairs(Child.PlacesInRoom.centre));
 
     }
 }

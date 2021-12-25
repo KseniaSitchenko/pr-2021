@@ -40,12 +40,6 @@ public class Child implements ChildrenActions{
             return name + " balance is: Ores = "  +  account.getBalance() + " | Toffees = " + account.getToffees();
     }
 
-    //метод для объявления о событии
-    public String makeAnnouncement(){
-        if (!place.getTypeOfPlace().equals(Locations.STREET)) throw new LocationException(place);
-            return name + " says: There will be a Great Show \"Evening of Miracles\" in Lillebrors's room\n";
-    }
-
     //метод для смены локации
     public String changeLocation(City.Place place){
         this.place = place;
@@ -75,34 +69,57 @@ public class Child implements ChildrenActions{
             } else return child.name + " doesn't have enough toffees to come in";
     }
 
-    //класс для коробки с конфетами
-    class BoxForToffees{
-        private int amount;
-        BoxForToffees(int amount){
-            this.amount = amount;
-        }
-        //сеттер для установки количества конфет
-        public void setAmountOfToffees(int toffeesAmount){
-            this.amount = toffeesAmount;
-        }
-        //геттер для возвращения количесвта конфет
-        public int getAmountOfToffees(){
-            return amount;
-        }
-    }
-
     //метод для складывания конфет в коробку и передачи ее другому ребенку
     public String giveBoxToAnother(Child child){
+        //локальный класс для коробки с конфетами
+        class BoxForToffees{
+            private int amount;
+            public BoxForToffees(int amount){
+                this.amount = amount;
+            }
+            //геттер для возвращения количества конфет
+            public int getAmount(){
+                return amount;
+            }
+            //сеттер для установки количества конфет
+            public void setAmount(int _amount){
+                this.amount = _amount;
+            }
+        }
         BoxForToffees box = new BoxForToffees(account.getToffees());
         account.setToffees(0);
-        child.account.setToffees(child.account.getToffees() + box.getAmountOfToffees());
-        box.setAmountOfToffees(0);
+        child.account.setToffees(child.account.getToffees() + box.getAmount());
+        box.setAmount(0);
         return name + " puts toffees in the box and gives it to " + child.name;
     }
 
+    //класс с перечислением мест в комнате
+    public enum PlacesInRoom{
+        corner("corner"),
+        windows("windows"),
+        centre("centre");
+        private String name;
+        PlacesInRoom(String name){
+            this.name = name;
+        }
+        public String getPlace(){
+            return name;
+        }
+    }
+
     //метод для расстановки стульев, может выкинуть ошибку местонахождения, если ребенок не в комнате
-    public String setUpChairs(){
+    public String setUpChairs(PlacesInRoom roomPlace){
         if (!place.getTypeOfPlace().equals(Locations.LILLEBRORS_ROOM)) throw new LocationException(place);
-            return name + " sets up chairs for the audience";
+        switch (roomPlace){
+            case corner -> {
+                return "sets up chairs for the audience in the corner";
+            }
+            case windows -> {
+                return "sets up chairs for the audience near windows";
+            }
+            case centre -> {
+                return "sets up chairs for the audience in the center";
+            }
+        } return "";
     }
 }
