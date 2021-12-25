@@ -112,13 +112,13 @@ public class Child implements ChildrenActions{
         if (!place.getTypeOfPlace().equals(Locations.LILLEBRORS_ROOM)) throw new LocationException(place);
         switch (roomPlace){
             case corner -> {
-                return "sets up chairs for the audience in the corner";
+                return name + " sets up chairs for the audience in the corner";
             }
             case windows -> {
-                return "sets up chairs for the audience near windows";
+                return name + " sets up chairs for the audience near windows";
             }
             case centre -> {
-                return "sets up chairs for the audience in the center";
+                return name + " sets up chairs for the audience in the center";
             }
         } return "";
     }

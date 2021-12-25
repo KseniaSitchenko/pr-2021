@@ -13,6 +13,7 @@ public class Main {
         System.out.println(gunilla.changeLocation(street));
         System.out.println(krister.changeLocation(street));
 
+        //анонимный класс для объявления о шоу
         Announcement showAnnouncement = new Announcement() {
             @Override
             public void makeAnnouncement(Child child) {
